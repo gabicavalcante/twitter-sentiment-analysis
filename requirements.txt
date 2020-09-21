@@ -1,0 +1,4 @@
+elasticsearch
+textblob
+tweepy
+pymongo
