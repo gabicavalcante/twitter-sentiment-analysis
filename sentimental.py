@@ -2,6 +2,8 @@ import json
 from tweepy.streaming import StreamListener
 from tweepy import OAuthHandler
 from tweepy import Stream
+from tweepy.api import API
+
 from textblob import TextBlob
 from elasticsearch import Elasticsearch
 
@@ -56,10 +58,10 @@ class TweetStreamListener(StreamListener):
             "subjectivity": tweet.sentiment.subjectivity,
             "sentiment": sentiment,
             "lang": dict_data["lang"],
-            "retweet_count": dict_data["retweet_count"],
-            "quote_count": dict_data["retweet_count"],
-            "reply_count": dict_data["reply_count"],
-            "favorite_count": dict_data["favorite_count"],
+            # "retweet_count": dict_data["retweet_count"],
+            # "quote_count": dict_data["retweet_count"],
+            # "reply_count": dict_data["reply_count"],
+            # "favorite_count": dict_data["favorite_count"],
             "followers_count": dict_data["user"]["followers_count"],
             "friends_count": dict_data["user"]["friends_count"],
             "filter_level": dict_data["filter_level"],
@@ -89,7 +91,7 @@ if __name__ == "__main__":
     auth = OAuthHandler(consumer_key, consumer_secret)
     auth.set_access_token(access_token, access_token_secret)
 
-    # create instance of the tweepy stream
+    # create instance of the tweepy stream 
     stream = Stream(auth, listener)
 
     # search twitter for "congress" keyword
