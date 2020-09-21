@@ -23,9 +23,6 @@ class TweetStreamListener(StreamListener):
 
     # on success
     def on_data(self, data):
-        import ipdb
-
-        ipdb.set_trace()
         # decode json
         dict_data = json.loads(data)
 
