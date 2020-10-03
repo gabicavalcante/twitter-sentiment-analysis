@@ -4,3 +4,4 @@ tweepy
 pymongo
 ipdb
 ipython
+'dramatiq[rabbitmq, watch]'
