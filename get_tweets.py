@@ -1,19 +1,15 @@
-import tweepy
-from config import *
+from task import get_tweets
 from datetime import date, timedelta
 
-auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-auth.set_access_token(access_token, access_token_secret)
+from rq import Queue, Worker
+from redis import Redis
 
-api = tweepy.API(auth)
+redis_conn = Redis(host="0.0.0.0", port=6379, db=0)
+queue = Queue("default", connection=redis_conn) 
 
-# search words and the date_since date as variables
-search_words = "covid+covid19+pandemic -filter:retweets"
 date_until = date.today() - timedelta(days=1)
 date_fst3 = [date.today() - timedelta(days=d) for d in range(1, 4)]
 date_lst3 = [date.today() - timedelta(days=d) for d in range(4, 7)]
-
-tweets_count = 150
 
 geocodes = dict(
     geocode_ny = "40.714353,-74.00597299999998,20km",
@@ -24,12 +20,11 @@ geocodes = dict(
 )
 # # q=f"{search_words} -filter:retweets until:{date_until}"
 
-# data = []
-for geocode in geocodes:
-    for date_until in first:
-        tweets = tweepy.Cursor(api.search,
-                    q=search_words,
-                    lang="en",
-                    geocode=geocodes["geocode_minnesota"],
-                    until=date_until).items(tweets_count)
-        data.append(tweet._json)
+if __name__ == "__main__":
+    for geocode in geocodes.values():
+        for date_until_1, date_until_2  in zip(date_fst3, date_lst3):
+            queue.enqueue(get_tweets, date_until_1, geocode)
+            print("%s, %s, %s" %(job, geocode, date_until))
+
+            queue.enqueue_in(timedelta(minutes=20), get_tweets, date_until_2, geocode)
+            print("%s, %s, %s" %(job, geocode, date_until))
