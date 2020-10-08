@@ -1,16 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: artist-web
-  description: The place to be, for great artists
+  name: twitter-sentiment-analysis
+  description: twitter-sentiment-analysis
   labels:
-    system: public-websites
+    system: twitter-sentiment-analysis
   annotations:
-    example.com/service-discovery: artistweb
-    circleci.com/project-slug: github/example-org/artist-website
+    example.com/service-discovery: twitter-sentiment-analysis 
   tags:
-    - java
+    - python
 spec:
   type: website
   lifecycle: production
-  owner: artist-relations@example.com
+  owner: twitter-sentiment-analysis@example.com
