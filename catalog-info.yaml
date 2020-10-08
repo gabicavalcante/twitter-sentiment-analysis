@@ -1,0 +1,15 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: twitter-sentiment-analysis
+  description: twitter-sentiment-analysis
+  labels:
+    system: twitter-sentiment-analysis
+  annotations:
+    example.com/service-discovery: twitter-sentiment-analysis 
+  tags:
+    - python
+spec:
+  type: website
+  lifecycle: production
+  owner: twitter-sentiment-analysis@example.com
