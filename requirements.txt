@@ -4,3 +4,5 @@ tweepy
 pymongo
 ipdb
 ipython
+redis
+rq
